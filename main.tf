@@ -1,12 +1,19 @@
 terraform {
   required_providers {
     aws = {
-      source = "hashicorp/aws"
+      source  = "hashicorp/aws"
       version = "5.1.0"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "3.5.1"
     }
   }
 }
 
+resource "random_id" "name-prefix" {
+  byte_length = 8
+}
 #terraform {
 #  backend "s3" {
 #    bucket         = "terraform-state-github-actions"
@@ -21,3 +28,15 @@ provider "aws" {
   region = "us-east-1"
 }
 
+#module "cloudfront" {
+#  source  = "terraform-aws-modules/cloudfront/aws"
+#  version = "3.2.1"
+#}
+
+data "aws_caller_identity" "current" {}
+
+resource "random_string" "random" {
+  length           = 6
+  special          = true
+  override_special = "/@£$"
+}

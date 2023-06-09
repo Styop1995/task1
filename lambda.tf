@@ -16,27 +16,28 @@ resource "aws_iam_role" "iam_for_lambda" {
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
-data "archive_file" "lambda" {
-  type        = "zip"
-  source_file = "lambda.js"
-  output_path = "lambda_function_payload.zip"
+resource "aws_iam_role_policy_attachment" "lambda_rds_policy_attachment" {
+  role       = aws_iam_role.iam_for_lambda.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonRDSFullAccess"
 }
 
-resource "aws_lambda_function" "test_lambda" {
-  # If the file is not in the current working directory you will need to include a
-  # path.module in the filename.
-  filename      = "lambda_function_payload.zip"
-  function_name = "lambda_function_name"
+resource "aws_iam_role_policy_attachment" "lambda_elasticache_policy_attachment" {
+  role       = aws_iam_role.iam_for_lambda.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonElastiCacheFullAccess"
+}
+
+resource "aws_iam_role_policy_attachment" "lambda_s3_policy_attachment" {
+  role       = aws_iam_role.iam_for_lambda.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
+}
+
+resource "aws_lambda_function" "back_lambda_function" {
+  function_name = "my-lambda-function"
+  handler       = "index.handler"
+  runtime       = var.lambda_runtime
   role          = aws_iam_role.iam_for_lambda.arn
-  handler       = "index.test"
-
-  source_code_hash = data.archive_file.lambda.output_base64sha256
-
-  runtime = "nodejs16.x"
-
-  environment {
-    variables = {
-      foo = "bar"
-    }
-  }
+  s3_bucket     = aws_s3_bucket.artifactes.id
+  s3_key        = var.s3_backend
+  depends_on = [aws_s3_bucket.artifactes]
 }
+
