@@ -22,11 +22,11 @@
 
 For running the Pipeline as a variable Set access key and Secret key in GitHub Action. 
 The following steps are included in the Pipeline:
-* The pipeline is checked out
+* Checkout code 
 * Install Terraform
-* Connect to AWS using the credentials
-* Terraform init
-* Terraform apply
+* Configure AWS Credentials
+* Initialize Terraform `Terraform init`
+* plan Terraform `terraform plan --auto-approve`
 
 
 ## Use the following list of the variables which is necessary to run the task
