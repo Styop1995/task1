@@ -1,6 +1,5 @@
-SIA Application Documentation.
+## SIA Application Documentation.
 
-```
 IaC: Terrafom.  
 CI/CD: GitHub Action.
 Frontend: The user interface for the application, hosted on Amazon S3 and distributed through CloudFront.
@@ -10,7 +9,6 @@ Database: A relational database managed by Amazon RDS for storing application da
 File Storage: Amazon S3 used for storing files uploaded by users.
 Caching: ElastiCache used as an in-memory data store for caching frequently accessed data.
 
-```
 
 ## Providers
 
@@ -39,7 +37,8 @@ Caching: ElastiCache used as an in-memory data store for caching frequently acce
 | asg\_policy\_arn | AutoScaling Group policy ARN |
 
 
-```
+## The Pipeline Sections and steps
+
 For running the Pipeline as a variable Set access key and Secret key in GitHub Action. 
 The following steps are included in the Pipeline:
 `The pipeline is checked out`
@@ -49,4 +48,3 @@ The following steps are included in the Pipeline:
 `Terraform apply`
 `Use the following list of the variables which is necessary to run the task`
 
-```
