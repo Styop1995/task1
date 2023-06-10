@@ -10,17 +10,11 @@
 * Caching: ElastiCache used as an in-memory data store for caching frequently accessed data.
 
 
-## Providers
-
-| Name | Version |
-|------|---------|
-| aws | n/a |
-
-
 
 ## The Pipeline Sections and steps
 
-For running the Pipeline as a variable Set access key and Secret key in GitHub Action. 
+# For running the Pipeline as a variable Set access key and Secret key in GitHub Action. 
+
 The following steps are included in the Pipeline:
 * Checkout code 
 * Install Terraform
@@ -29,16 +23,4 @@ The following steps are included in the Pipeline:
 * plan Terraform `terraform plan --auto-approve`
 
 
-## Use the following list of the variables which is necessary to run the task
-
-## Inputs
-
-| Name                | Description                                                                                                 | Type     | Default       | Required |
-|---------------------|-------------------------------------------------------------------------------------------------------------|----------|---------------|:-----:|
-| asg\_config         | Map configuration for auto scaling groups                                                                   | `map`    | n/a           | yes |
-| environment         | Tag to assign to EC2 instances launched by this ASG                                                         | `string` | n/a           | yes |
-| project\_name       | Project name. Used for tagging resources                                                                    | `string` | n/a           | yes |
-| asg\_shutdown\_hook | Map configuration for auto scaling groups' shutdown hooks                                                   | `map`    | `{}`          | no |
-| aws\_region         | AWS region to use for project                                                                               | `string` | `"eu-west-1"` | no |
-| enable              | Enable or dis2able creation of module                                                                       | `bool`   | `true`        | no |
-| tags                | Additional tags to be propagated on EC2 (Should be set in order to comply with Railsr tagging requirements) | `map`    | `{}`          | no |
+## 
