@@ -23,4 +23,4 @@ The following steps are included in the Pipeline:
 * plan Terraform `terraform plan --auto-approve`
 
 
-## 
+## The endpoints of Memcache and DB are taken from output.tf 
